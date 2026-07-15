@@ -113,10 +113,10 @@ GWbyNUnGeHOCYoySzItdipDcnceESACjCvu9Iwo=
         <div class="section-title" style="margin-top:10px;">Interests</div>
         <div style="padding:8px 4px;font-size:11px;line-height:1.6;">
           <div><span class="interest-label">General:</span>
-            Freedom tech · sovereignty · open protocols · coffee · travel · code at night · drone · skateboard · solving puzzles · gaming (Rocket League, Counter-Strike, Rust).
+            Freedom tech · sovereignty · open protocols · coffee · travel · code at night · drone · skateboard · go-kart racing · solving puzzles · gaming (Rocket League, Counter-Strike, Rust).
           </div>
           <div style="margin-top:6px;"><span class="interest-label">Song:</span>
-            FitGirl_repack_tune.mp3
+            <a href="#" id="song-link" target="_self">FitGirl_repack_tune.mp3</a>
           </div>
         </div>
         <div style="text-align:center;margin-top:8px;">
@@ -244,13 +244,15 @@ GWbyNUnGeHOCYoySzItdipDcnceESACjCvu9Iwo=
 <audio id="bgm" src="audio/fitgirl_repack_tune.mp3" preload="auto"></audio>
 <script>
   (function () {
-    var started = false;
     var audio = document.getElementById('bgm');
     audio.volume = 0.2;
-    document.addEventListener('click', function () {
-      if (started) return;
-      started = true;
-      audio.play().catch(function () { started = false; });
+    document.getElementById('song-link').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
     });
   })();
 </script>
