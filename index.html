@@ -236,7 +236,7 @@ GWbyNUnGeHOCYoySzItdipDcnceESACjCvu9Iwo=
       </td>
     </tr>
   </table>
-  <div style="text-align:center;padding:10px 0;">
+  <div id="ie-banner" style="text-align:center;padding:10px 0;">
     <img src="images/explorer2.gif" alt="" style="cursor:pointer;"
          onclick='alert("⚠ INTERNET DETECTED\n\nA government agent is now aware of your browsing.\nPlease install Tor or accept your fate.")'>
   </div>
@@ -244,6 +244,19 @@ GWbyNUnGeHOCYoySzItdipDcnceESACjCvu9Iwo=
 <audio id="bgm" src="audio/fitgirl_repack_tune.mp3" preload="auto"></audio>
 <script>
   (function () {
+    // Tor Browser has no official detection API, so this is a heuristic based
+    // on its fingerprinting resistance: Firefox UA, timezone locked to UTC,
+    // and screen dimensions spoofed to match the viewport exactly.
+    var likelyTor =
+      location.hostname.endsWith('.onion') ||
+      (/Firefox/.test(navigator.userAgent) &&
+        new Date().getTimezoneOffset() === 0 &&
+        screen.width === window.innerWidth &&
+        screen.height === window.innerHeight);
+    if (likelyTor) {
+      document.getElementById('ie-banner').style.display = 'none';
+    }
+
     var audio = document.getElementById('bgm');
     audio.volume = 0.2;
     document.getElementById('song-link').addEventListener('click', function (e) {
